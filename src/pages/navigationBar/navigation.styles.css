@@ -1,0 +1,15 @@
+.nav-container{
+    margin:12px;
+    color: #899385;
+    text-decoration: none;
+}
+.nav-container:hover{
+    color: #677860;
+    font-weight: bold;
+    text-decoration: none;
+}
+.logo{
+   position: absolute;
+   top:10px;
+   left:10px;
+}
