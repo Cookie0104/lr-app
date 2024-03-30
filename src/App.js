@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import NevigationBar from './pages/navigationBar/NevigationBar.js';
+import NevigationBar from './pages/navigation-bar/nevigation-bar.pages';
 import { Route, Routes } from 'react-router-dom';
 import Home from "./pages/home/home.pages";
 import Music from './pages/music/music.pages';

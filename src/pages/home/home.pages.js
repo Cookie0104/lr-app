@@ -1,10 +1,11 @@
 import { Cover1 } from '../../assets/index.js';
 import styled from "styled-components";
 import Title from '../../components/title.js';
-import TeamIntro from "./homeBlock/teamIntro.js";
+import TeamIntro from "./home-block/01-team-intro/01-team-intro.js";
 import Footer from '../../components/footer.js';
-import MemberIntro from './homeBlock/memberIntro.js';
-import Experience from './homeBlock/experience.js';
+import MemberIntro from './home-block/02-member-intro/02-member-intro.js';
+import Experience from './home-block/03-experience/03-experience.js';
+import ConcertInfo from './home-block/04-concert-info/04-concert-info.js';
 
 const Home = () => {
     return (
@@ -16,6 +17,7 @@ const Home = () => {
             <TeamIntro/>
             <MemberIntro/>
             <Experience/>
+            <ConcertInfo/>
             <Footer/>
         </div>
     )
@@ -26,7 +28,7 @@ const Home = () => {
 export default Home ;
 
 const HomeBannerCover1 = styled.img`
-  width:100%; height:auto;
+  width:100vw; height:auto;
   margin:100px 0px 0px 0px ;
 `
 
