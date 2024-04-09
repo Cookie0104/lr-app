@@ -5,7 +5,7 @@ export const StyledOuter = styled.div`
   background-color: #F3F3F3;
   height: 100px;width: 100%;
   display: flex;justify-content: space-between; align-items: center;
-  position:fixed;top:0px;
+  position:fixed; top:0px;
   z-index:200;
 
   @media screen and (min-width: 425px) and (max-width: 768px){ 
@@ -17,18 +17,63 @@ export const StyledOuter = styled.div`
   }
 `;
 
-export const Hamburger = styled.div`
+export const HamburgerOuter = styled.div`
  height:24px;width:24px;
  padding:4px;
  display:none;
- flex-direction:column;
- justify-content: space-around;
  margin-left:16px;
  
  @media screen and (max-width: 425px){ 
-    display:flex;
+    display:block;
 }
 `
+
+export const Hamburger = styled.div`
+ height:24px;width:24px;
+ display:flex;
+ flex-direction:column;
+ justify-content: space-around;
+`
+
+export const Close = styled.div`
+  height:24px;width:24px;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  justify-content: space-around;
+`
+
+export const RectangleAnimate = styled.div`
+  width:100%; height:2px;
+  background-color:#899385;
+  position:absolute;
+
+  animation-name: rotate1;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+  transform-origin: 50% 50%;
+
+  @keyframes rotate1 {
+    0%   { rotate: 0deg; width:100%; }
+    100% { rotate: -45deg; width:100%;}
+  }
+
+  &:nth-last-child(2) {
+      animation-name: rotate2;
+      animation-duration: 0.3s;
+      animation-fill-mode: forwards;
+      animation-timing-function: ease-in-out;
+      transform-origin: 50% 50%;
+
+      @keyframes rotate2 {
+        0%   { rotate: 0deg; width:100%;}
+        100% { rotate: 45deg; width:100%;}
+      }
+  
+    }
+`
+
 export const Rectangle = styled.div`
  width:100%; height:2px;
  background-color:#899385;
@@ -39,15 +84,20 @@ export const Logo = styled.img`
   padding:8px 16px;
 `;
 
-export const NavContainer = styled.div`
+export const NavContainerCollapse = styled.div`
     @media screen and (max-width: 425px){ 
-        display:none;
+        display:flex;
         flex-direction:column;
-        position:fixed;
+        position:absolute;
         top:60px;
         background:#F3F3F3;
         width:100vw;
         padding-bottom:16px;
+  }
+`
+export const NavContainer = styled.div`
+    @media screen and (max-width: 425px){ 
+        display:none;
   }
 `
 

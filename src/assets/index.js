@@ -14,3 +14,4 @@ export { default as CartImg } from './icon/cart.svg';
 export { default as Instagram } from './icon/ig.svg';
 export { default as Facebook } from './icon/fb.svg';
 export { default as Youtube } from './icon/yt.svg';
+export { default as Search } from './icon/search.svg';

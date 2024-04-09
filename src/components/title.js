@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-const Title = (props) => {
+const Title = ({title}) => {
     return (
         <TitleOuter>
-            <TitleStyle>{props.title}</TitleStyle>
+            <TitleStyle>{title}</TitleStyle>
         </TitleOuter>
     )
 };

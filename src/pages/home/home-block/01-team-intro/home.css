@@ -51,10 +51,23 @@
       }
 }
 
-.photo.position2::after{
-    content:'';
+.photo.position2::before{
+    content:"123456789";
+    z-index:200;
     position:absolute;
     top:-30px;
+    right:-30px;
+    display:block;
+    width:100px;
+    height:100px;
+    background:#fff;
+}
+
+.beforetest::after{
+    content:"123456789";
+    z-index:200;
+    position:absolute;
+    top:-20px;
     right:-30px;
     display:block;
     width:100px;
