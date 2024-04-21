@@ -1,7 +1,7 @@
 import { Teamphoto1 } from '../../../../assets/index.js';
 import { Teamphoto2 } from '../../../../assets/index.js';
 import SerialNumber from "../serial-number.js";
-import SubTitle from "../../../../components/subtitle.js";
+import Subtitle from "../../../../components/subtitle.js";
 import "./home.css";
 import {
   TeamIntroOuter,
@@ -22,7 +22,7 @@ const TeamIntro = () => {
         <TeamIntroOuter>
             <SerialNumber number="01"/>
             <TeamIntroInner>
-                <SubTitle position="left" title="團隊介紹"/>
+                <Subtitle position="left" title="團隊介紹"/>
                 <ContentOuter>
                   {TEAMINTRODUCTION.map((introduceWord) => {
                       return <IntroduceWord intro={introduceWord.intro} />

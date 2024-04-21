@@ -1,3 +1,5 @@
+
+
 const Slashie = () => {
     return (
         <div>
@@ -7,3 +9,4 @@ const Slashie = () => {
 };
 
 export default Slashie ;
+

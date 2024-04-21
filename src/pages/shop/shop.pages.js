@@ -1,34 +1,110 @@
-import styled from "styled-components";
+
 import Title from "../../components/title.js"
 import Footer from "../../components/footer.js"
 import { Search } from "../../assets/index.js";
 import SHOP from "../../data/SHOP.json";
+import Scorepage from "./Shop-inner.page.js";
+import {
+    ScoreImg,
+    ScoreOuter,
+    ScoreInner,
+    ScoreInfoOuter,
+    Price,
+    Name,
+    Introduction,
+    TagOuter,
+    TagStyle,
+    SelectStyle,
+    SearchIcon,
+    SeachBar,
+    Sorting,
+    SearchArea,
+    SearchOuter,
+    ShopInner,
+    ShopOuter
+  } from './shop.style.js';
 
-function ShowScore({name,image,price,introduction}){
-    return (
-        <>
-            <img url={image} alt="123" />
-            <div>{price}</div>
-            <div>{name}</div>
-            <div>{introduction}</div>
-        </> 
+
+function ShowTag ({scoreTag}){
+    return(
+        <TagStyle>{scoreTag}</TagStyle>
     )
-    }
+}
 
-function Shop() {
+function ShowScore({name,image,price,introduction,tag}){
+    const scoreTag = Object.values(tag);
     return (
-        <>
+            <ScoreInner>
+                <ScoreImg src={image} alt="123" />
+                <ScoreInfoOuter>
+                    <Price>$ {price}</Price>
+                    <Name>{name}</Name>
+                    <Introduction>{introduction}</Introduction>
+                
+                    <TagOuter>
+                        {scoreTag.map((scoreTag) => <ShowTag scoreTag={scoreTag}/>)}
+                    </TagOuter>
+                </ScoreInfoOuter>
+            </ScoreInner>
+    )
+    };
+
+
+    
+function Shop() {
+
+    // constructor() {
+    //     this.state = {
+    //         score: [],
+    //         searchField: '',
+    //     };
+    // };
+    
+    // onSearchChange = (event) => {
+    //     const searchField = event.target.value.toLocaleLowerCase();
+    //     this.setState(() => {
+    //         return { searchField };
+    //     });
+    // };
+
+    // const { score, searchField } = this.state;
+    // const { onSearchChange } = this;
+    // const filteredScore = score.filter((score) => {
+    //     return score.name.toLocaleLowerCase().includes(searchField);
+    // });
+    
+    return (
+        <>  
             <ShopOuter>
+                
                 <Title title="STORE" />
-                <ShpoInner>
-                    <SearchArea>
-                        <SeachBar placeholder="輸入關鍵字"></SeachBar>
-                        <SearchIcon>
-                            <img src={Search} alt="search" />
-                        </SearchIcon>
-                    </SearchArea>
-                    {SHOP.map(({ name,image,price,introduction }) => <ShowScore name={name} image={image} price={price} introduction={introduction}/>)}
-                </ShpoInner>
+                <ShopInner>
+                    <SearchOuter>
+                        <SearchArea>
+                            <SeachBar 
+                                // type="search" 
+                                // onChangeHandler={onSearchChange} 
+                                placeholder="輸入關鍵字">
+                            </SeachBar>
+                            <SearchIcon>
+                                <img src={Search} alt="search" />
+                            </SearchIcon>
+                        </SearchArea>
+                        <Sorting>
+                            <div>排序：</div>
+                            <SelectStyle>
+                                <option selected value="price">價格由低至高</option>
+                                <option value="price">價格由高至低</option>
+                                <option value="grade">難易度由低至高</option>
+                                <option value="grade">難易度由高至低</option>
+                            </SelectStyle>
+                        </Sorting>
+                    </SearchOuter>
+                    <ScoreOuter>
+                        {SHOP.map(({ name,image,price,introduction,tag }) => <ShowScore name={name} image={image} price={price} introduction={introduction} tag={tag}/>)}
+                    </ScoreOuter>
+                </ShopInner>
+                <Scorepage/>
             </ShopOuter>
             <Footer />
         </>
@@ -37,55 +113,3 @@ function Shop() {
 
 export default Shop ;
 
-const ShopOuter = styled.div`
-padding: 280px 0px 64px 0px;
-width:100% ; height:fit-content;
-background:linear-gradient(to top, #384551, #242424);
-`
-
-const ShpoInner = styled.div`
-margin:40px 80px 0px 80px; padding:0px 40px;
-width:calc(100% - 160px) ; max-width:1200px; height:fit-content;
-background:#F3F3F3;
-`
-const SearchArea = styled.div`
-height:104px;
-width:calc(100% - 80px);
-margin:0px 40px;
-border-bottom:1px solid rgba(56,69,81,0.5);
-display:flex;
-align-items: center
-`
-
-const SeachBar = styled.input`
-background:#fff;
-border:1px solid #879184;
-border-radius:8px 0px 0px 8px;
-font-size:20px;
-padding:12px 20px;
-line-height:30px;
-width:300px;
-height:44px;
-color:#879184;
-box-sizing:border-box ;
-
-&:focus{
-    outline:1px solid #879184;
-    height:42px;
-}
-
-&::placeholder{
-    color: red;
-}
-
-`
-
-const SearchIcon = styled.div`
-background:#879184;
-width:44px;
-height:44px;
-border-radius:0px 8px 8px 0px;
-display:flex;
-align-items: center;
-justify-content: center;
-`

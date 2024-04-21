@@ -1,5 +1,5 @@
 import SerialNumber from "../serial-number.js";
-import SubTitle from "../../../../components/subtitle.js";
+import Subtitle from "../../../../components/subtitle.js";
 import {
   TeamIntroOuter,
   TeamIntroInner,
@@ -32,7 +32,7 @@ const ConcertInfo = () => {
  return (
      <TeamIntroOuter>
          <SerialNumber position="right" number="03"/>
-         <TeamIntroInner><SubTitle title="音樂會報報"/>
+         <TeamIntroInner><Subtitle title="音樂會報報"/>
             {CONCERTINFOMATION.map(({imgLink,concertName,date,info,venue,index}) => 
             <ConcertRecommend imgLink={imgLink} concertName={concertName} date={date} info={info} venue={venue} index={index}/>
                 )}  

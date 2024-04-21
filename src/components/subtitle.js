@@ -1,7 +1,7 @@
 import styled,{css} from "styled-components";
 
 
-const SubTitle = ({title,position}) => {
+const Subtitle = ({title,position}) => {
     return (
         <SubTitleOuter>
             <SubTitleStyle position={position}>{title}</SubTitleStyle>
@@ -9,7 +9,7 @@ const SubTitle = ({title,position}) => {
     )
 };
 
-export default SubTitle ;
+export default Subtitle ;
 
 const SubTitleOuter = styled.div`
     width:100%;
