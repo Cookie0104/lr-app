@@ -1,9 +1,7 @@
-
 import Title from "../../components/title.js"
 import Footer from "../../components/footer.js"
 import { Search } from "../../assets/index.js";
 import SHOP from "../../data/SHOP.json";
-import Scorepage from "./Shop-inner.page.js";
 import {
     ScoreImg,
     ScoreOuter,
@@ -21,7 +19,8 @@ import {
     SearchArea,
     SearchOuter,
     ShopInner,
-    ShopOuter
+    ShopOuter,
+    LinkOuter
   } from './shop.style.js';
 
 
@@ -31,16 +30,15 @@ function ShowTag ({scoreTag}){
     )
 }
 
-function ShowScore({name,image,price,introduction,tag}){
+function ShowScore({id,name,image,price,introduction,tag}){
     const scoreTag = Object.values(tag);
     return (
             <ScoreInner>
-                <ScoreImg src={image} alt="123" />
+                <LinkOuter to={`/shop/${id}`}><ScoreImg src={image} alt="123" /></LinkOuter>
                 <ScoreInfoOuter>
                     <Price>$ {price}</Price>
                     <Name>{name}</Name>
                     <Introduction>{introduction}</Introduction>
-                
                     <TagOuter>
                         {scoreTag.map((scoreTag) => <ShowTag scoreTag={scoreTag}/>)}
                     </TagOuter>
@@ -53,30 +51,9 @@ function ShowScore({name,image,price,introduction,tag}){
     
 function Shop() {
 
-    // constructor() {
-    //     this.state = {
-    //         score: [],
-    //         searchField: '',
-    //     };
-    // };
-    
-    // onSearchChange = (event) => {
-    //     const searchField = event.target.value.toLocaleLowerCase();
-    //     this.setState(() => {
-    //         return { searchField };
-    //     });
-    // };
-
-    // const { score, searchField } = this.state;
-    // const { onSearchChange } = this;
-    // const filteredScore = score.filter((score) => {
-    //     return score.name.toLocaleLowerCase().includes(searchField);
-    // });
-    
     return (
         <>  
             <ShopOuter>
-                
                 <Title title="STORE" />
                 <ShopInner>
                     <SearchOuter>
@@ -101,10 +78,9 @@ function Shop() {
                         </Sorting>
                     </SearchOuter>
                     <ScoreOuter>
-                        {SHOP.map(({ name,image,price,introduction,tag }) => <ShowScore name={name} image={image} price={price} introduction={introduction} tag={tag}/>)}
+                        {SHOP.map(({ id,name,image,price,introduction,tag }) => <ShowScore id={id} name={name} image={image} price={price} introduction={introduction} tag={tag}/>)}
                     </ScoreOuter>
-                </ShopInner>
-                <Scorepage/>
+                </ShopInner> 
             </ShopOuter>
             <Footer />
         </>

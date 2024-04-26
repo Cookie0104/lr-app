@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from 'react-router-dom';
 
 export const ShopOuter = styled.div`
 padding: 280px 0px 0px 0px;
@@ -191,6 +192,16 @@ gap:24px;
 padding:64px 30px 40px 30px;
 border: 0.5px solid rgba(137,147,133,0.3);
 box-sizing:border-box;
+
+&:hover{
+  background:#eeeeee;
+}
+`
+
+export const LinkOuter = styled(Link)`
+display: flex;
+align-items: center;
+justify-content:center;
 `
 
 export const ScoreInfoOuter = styled.div`
@@ -203,7 +214,8 @@ width:95%;
 `
 
 export const Price = styled.div`
-font-size:20px;
+font-size:23px;
+font-weight:normal;
 color:#384551;
 line-height:48px;
 padding-left:8px;
