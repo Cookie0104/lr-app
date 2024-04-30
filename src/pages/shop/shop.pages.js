@@ -1,17 +1,9 @@
+import {useState , useEffect} from "react";
 import Title from "../../components/title.js"
 import Footer from "../../components/footer.js"
 import { Search } from "../../assets/index.js";
-import SHOP from "../../data/SHOP.json";
+//import SHOP from "../../data/SHOP.json";
 import {
-    ScoreImg,
-    ScoreOuter,
-    ScoreInner,
-    ScoreInfoOuter,
-    Price,
-    Name,
-    Introduction,
-    TagOuter,
-    TagStyle,
     SelectStyle,
     SearchIcon,
     SeachBar,
@@ -20,36 +12,57 @@ import {
     SearchOuter,
     ShopInner,
     ShopOuter,
-    LinkOuter
   } from './shop.style.js';
+import ScoreList from "./scorelist.js";
 
 
-function ShowTag ({scoreTag}){
-    return(
-        <TagStyle>{scoreTag}</TagStyle>
-    )
-}
+// function ShowTag ({scoreTag}){
+//     return(
+//         <TagStyle>{scoreTag}</TagStyle>
+//     )
+// }
 
-function ShowScore({id,name,image,price,introduction,tag}){
-    const scoreTag = Object.values(tag);
-    return (
-            <ScoreInner>
-                <LinkOuter to={`/shop/${id}`}><ScoreImg src={image} alt="123" /></LinkOuter>
-                <ScoreInfoOuter>
-                    <Price>$ {price}</Price>
-                    <Name>{name}</Name>
-                    <Introduction>{introduction}</Introduction>
-                    <TagOuter>
-                        {scoreTag.map((scoreTag) => <ShowTag scoreTag={scoreTag}/>)}
-                    </TagOuter>
-                </ScoreInfoOuter>
-            </ScoreInner>
-    )
-    };
+// function ShowScore({id,name,image,price,introduction,tag}){
+//     const scoreTag = Object.values(tag);
+//     return (
+//             <ScoreInner>
+//                 <LinkOuter to={`/shop/${id}`}><ScoreImg src={image} alt="123" /></LinkOuter>
+//                 <ScoreInfoOuter>
+//                     <Price>$ {price}</Price>
+//                     <Name>{name}</Name>
+//                     <Introduction>{introduction}</Introduction>
+//                     <TagOuter>
+//                         {scoreTag.map((scoreTag) => <ShowTag scoreTag={scoreTag}/>)}
+//                     </TagOuter>
+//                 </ScoreInfoOuter>
+//             </ScoreInner>
+//     )
+// };
 
 
     
 function Shop() {
+    const [searchField, setSearchField] = useState('');
+    const [scores, setScores] = useState([]);
+    const [filteredScores, setFilteredScores] = useState(scores);
+
+    useEffect(() => {
+		fetch("../../data/SHOP.json")
+			.then((response) => response.json())
+			.then((users) => setScores(users));
+	}, []);
+
+	useEffect(() => {
+		const newFilteredScores = scores.filter((score) => {
+			return score.name.toLocaleLowerCase().includes(searchField);
+		});
+		setFilteredScores(newFilteredScores);
+	}, [scores, searchField]);
+
+	const onSearchChange = (event) => {
+		const searchFieldString = event.target.value.toLocaleLowerCase();
+		setSearchField(searchFieldString);
+	};
 
     return (
         <>  
@@ -59,8 +72,8 @@ function Shop() {
                     <SearchOuter>
                         <SearchArea>
                             <SeachBar 
-                                // type="search" 
-                                // onChangeHandler={onSearchChange} 
+                                type="search" 
+                                onChange={onSearchChange} 
                                 placeholder="輸入關鍵字">
                             </SeachBar>
                             <SearchIcon>
@@ -77,9 +90,10 @@ function Shop() {
                             </SelectStyle>
                         </Sorting>
                     </SearchOuter>
-                    <ScoreOuter>
+                    <ScoreList scores={filteredScores}/>
+                    {/* <ScoreOuter monsters={filteredMonsters}>
                         {SHOP.map(({ id,name,image,price,introduction,tag }) => <ShowScore id={id} name={name} image={image} price={price} introduction={introduction} tag={tag}/>)}
-                    </ScoreOuter>
+                    </ScoreOuter> */}
                 </ShopInner> 
             </ShopOuter>
             <Footer />

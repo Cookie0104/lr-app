@@ -2,54 +2,34 @@ import styled,{css} from "styled-components";
 import SHOP from "../../data/SHOP.json";
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { StarGrade } from '../../assets/index.js';
+import { nonStarGrade } from '../../assets/index.js';
 
 const Scorepage = () => {
-    const { id } = useParams();
+    let { id } = useParams();
 
     //指定Data
     const thisData = SHOP.find((SHOP) => SHOP.id === id);
+    const thisDataIndex = SHOP.findIndex((SHOP) => SHOP.id === id);
     const scoreTag = thisData.tag;
+    let PrevPage = +thisDataIndex - 1 >= 0 ? SHOP[thisDataIndex - 1] : null;
+    let NextPage = +thisDataIndex + 1 === SHOP.length ? null : SHOP[thisDataIndex + 1];
 
     //星星數量
-    const starAmount = thisData.grade;
-    const starOuter = document.getElementById("starOuter");
-    function setStar(){
-        var star;
-        for(star = 1; star <= starAmount ; star++){
-            console.log(star);
-            var newStar = document.createElement("div");
-            starOuter.appendChild(newStar);
-            newStar.setAttribute('class', 'greenstar');
-        };
+    window.onload = function() {
+        printStar(thisData.grade);
     };
-    setStar();
-
-    //上一頁下一頁
-    const idNumber = thisData.id;
-    let nextScore = "0" + ( +idNumber +1 );
-    let prevScore = "0" + ( +idNumber -1 );
-    function setNextPage(){
-        if( +idNumber === SHOP.length){
-            nextScore = "0" + SHOP.length ;
-            document.getElementById("nextBtn").disabled = true;
-        }else{
-            document.getElementById("nextBtn").disabled = false;
-        };
-    };
-    function setPrevPage(){
-        if( +idNumber === 1 ){
-            prevScore = "01";
-            document.getElementById("prevBtn").disabled = true;
-        }else{
-            document.getElementById("prevBtn").disabled = false;
-        };
-    };
-    setPrevPage();
-    setNextPage();
-
-   
-
-    
+    function printStar(n) {
+        let result = "";
+        for (let i = 1; i <= n; i += 1) {
+            result += "<div class='greenstar'></div>";
+        }
+        let graystar = (5 - n);
+        for(let j = 1 ; j <= graystar ; j += 1){
+            result += "<div class='graystar'></div>";
+        }
+        document.getElementById("starOuter").innerHTML = result;
+    }
 
     return (
         <ScorepageOuter>
@@ -58,8 +38,10 @@ const Scorepage = () => {
                     <Button color="blue">← 回樂譜列表</Button>
                 </Link>
                 <div>
-                    <Link to={`/shop/${prevScore}`}><Button id="prevBtn" color="blue">← 前一曲</Button></Link>
-                    <Link to={`/shop/${nextScore}`}><Button id="nextBtn" color="blue">後一曲 →</Button></Link>
+                    {PrevPage && ( <Link to={`/shop/${PrevPage.id}`}><Button onClick={() => printStar(thisData.grade)} color="blue">← 前一曲</Button></Link> )}
+                    {!PrevPage && ( <Button disabled id="prevBtn" color="blue">← 前一曲</Button> )}
+                    {NextPage && ( <Link to={`/shop/${NextPage.id}`}><Button onClick={() => printStar(thisData.grade)} color="blue">後一曲 →</Button></Link> )}
+                    {!NextPage && ( <Button disabled id="nextBtn" color="blue">後一曲 →</Button> )}
                 </div>
             </ButtonArea>
             <ScoreInfo>
@@ -68,7 +50,7 @@ const Scorepage = () => {
                         <ScoreImg src={thisData.image} alt="123" />
                     </div>
                     <div>
-                        <audio controls src={thisData.url}></audio>
+                        <Audio controls src={thisData.url}></Audio>
                     </div>
                     <div>
                          Description
@@ -239,13 +221,22 @@ line-height:50px;
 const Grade = styled.div`
 display:flex;
 flex-direction:row;
+gap:4px;
 
 & div.greenstar{
-background-image:url("../../assets/icon/star.png");
-background-repeat: no-repeat;
-background-position: center center;
+    background-image:url(${StarGrade});
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size:100% 100%;
+    height:16px;width:16px;
+}
 
-height:24px;width:24px;
+& div.graystar{
+    background-image:url(${nonStarGrade});
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size:100% 100%;
+    height:16px;width:16px;
 }
 `
 const Introduction = styled.div`
@@ -268,4 +259,15 @@ font-weight:normal;
 line-height:24px;
 color:#899385;
 padding-top:16px;
+`
+
+const Audio = styled.audio`
+-webkit-transition:all 0.5s linear;
+-moz-transition:all 0.5s linear;
+-o-transition:all 0.5s linear;
+transition:all 0.5s linear;
+-moz-border-radius:7px 7px 7px 7px ;
+-webkit-border-radius:7px 7px 7px 7px ;
+border-radius:7px 7px 7px 7px ;
+width:100%;
 `

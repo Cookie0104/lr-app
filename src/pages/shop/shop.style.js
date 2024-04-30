@@ -182,9 +182,7 @@ flex-wrap: wrap;
 `
 
 export const ScoreInner = styled.div`
-flex-basis:250px;
-width:calc(30% - 60px);
-flex-grow: 1;
+width:calc(100% / 4);
 display: flex;
 flex-direction:column;
 align-items: center;
@@ -196,6 +194,17 @@ box-sizing:border-box;
 &:hover{
   background:#eeeeee;
 }
+
+@media screen and (min-width: 764px) and (max-width: 1230px){ 
+  width:calc(100% / 3);
+}
+
+@media screen and (max-width: 764px){ 
+  flex-grow:1;
+  min-width:250px;
+}
+
+
 `
 
 export const LinkOuter = styled(Link)`
