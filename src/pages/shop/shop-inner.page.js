@@ -222,6 +222,7 @@ const Grade = styled.div`
 display:flex;
 flex-direction:row;
 gap:4px;
+margin-top:16px;
 
 & div.greenstar{
     background-image:url(${StarGrade});

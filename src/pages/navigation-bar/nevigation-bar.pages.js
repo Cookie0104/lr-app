@@ -22,7 +22,6 @@ function NavigationBar() {
   const [collapse,setCollapse] = useState(false);
   const clickHandle =()=>{
     setCollapse(!collapse);
-    console.log("collapse",collapse);
   }
   return (
       <>

@@ -34,3 +34,5 @@ const Score = ({id,name,image,price,introduction,tag}) => {
 };
 
 export default Score;
+
+

@@ -203,8 +203,6 @@ box-sizing:border-box;
   flex-grow:1;
   min-width:250px;
 }
-
-
 `
 
 export const LinkOuter = styled(Link)`
@@ -261,4 +259,13 @@ color:#fff;
 font-size:12px;
 padding:10px 12px;
 border-radius:20px;
+`
+
+export const EmptyOuter = styled.div`
+width:100%;
+text-align:center;
+line-height:200px;
+opacity:30%;
+color:#899385;
+font-size:30px;
 `

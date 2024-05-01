@@ -2,7 +2,7 @@ import {useState , useEffect} from "react";
 import Title from "../../components/title.js"
 import Footer from "../../components/footer.js"
 import { Search } from "../../assets/index.js";
-//import SHOP from "../../data/SHOP.json";
+import SHOP from "../../data/SHOP.json";
 import {
     SelectStyle,
     SearchIcon,
@@ -12,44 +12,21 @@ import {
     SearchOuter,
     ShopInner,
     ShopOuter,
+    EmptyOuter
   } from './shop.style.js';
-import ScoreList from "./scorelist.js";
-
-
-// function ShowTag ({scoreTag}){
-//     return(
-//         <TagStyle>{scoreTag}</TagStyle>
-//     )
-// }
-
-// function ShowScore({id,name,image,price,introduction,tag}){
-//     const scoreTag = Object.values(tag);
-//     return (
-//             <ScoreInner>
-//                 <LinkOuter to={`/shop/${id}`}><ScoreImg src={image} alt="123" /></LinkOuter>
-//                 <ScoreInfoOuter>
-//                     <Price>$ {price}</Price>
-//                     <Name>{name}</Name>
-//                     <Introduction>{introduction}</Introduction>
-//                     <TagOuter>
-//                         {scoreTag.map((scoreTag) => <ShowTag scoreTag={scoreTag}/>)}
-//                     </TagOuter>
-//                 </ScoreInfoOuter>
-//             </ScoreInner>
-//     )
-// };
-
+import ScoreList from "./score-list.js";
 
     
 function Shop() {
     const [searchField, setSearchField] = useState('');
-    const [scores, setScores] = useState([]);
+    const [scores, setScores] = useState(SHOP);
     const [filteredScores, setFilteredScores] = useState(scores);
+    const [hasScore, setHasScore] = useState(true);
 
     useEffect(() => {
 		fetch("../../data/SHOP.json")
 			.then((response) => response.json())
-			.then((users) => setScores(users));
+			.then((name) => setScores(name));
 	}, []);
 
 	useEffect(() => {
@@ -57,12 +34,28 @@ function Shop() {
 			return score.name.toLocaleLowerCase().includes(searchField);
 		});
 		setFilteredScores(newFilteredScores);
+        console.log(newFilteredScores.length);
+        
+        if(newFilteredScores.length === 0){
+            setHasScore(false);
+        }else{
+            setHasScore(true);
+        };
+
 	}, [scores, searchField]);
 
 	const onSearchChange = (event) => {
 		const searchFieldString = event.target.value.toLocaleLowerCase();
 		setSearchField(searchFieldString);
 	};
+
+    const onSelectChange = (event) => {
+        
+	};
+
+    
+
+    
 
     return (
         <>  
@@ -82,18 +75,18 @@ function Shop() {
                         </SearchArea>
                         <Sorting>
                             <div>排序：</div>
-                            <SelectStyle>
-                                <option selected value="price">價格由低至高</option>
-                                <option value="price">價格由高至低</option>
-                                <option value="grade">難易度由低至高</option>
-                                <option value="grade">難易度由高至低</option>
+                            <SelectStyle onSelect={onSelectChange}>
+                                <option selected value="priceUp">價格由低至高</option>
+                                <option value="priceDown">價格由高至低</option>
+                                <option value="gradeUp">難易度由低至高</option>
+                                <option value="gradeDown">難易度由高至低</option>
                             </SelectStyle>
                         </Sorting>
                     </SearchOuter>
                     <ScoreList scores={filteredScores}/>
-                    {/* <ScoreOuter monsters={filteredMonsters}>
-                        {SHOP.map(({ id,name,image,price,introduction,tag }) => <ShowScore id={id} name={name} image={image} price={price} introduction={introduction} tag={tag}/>)}
-                    </ScoreOuter> */}
+                    {!hasScore && 
+                     <EmptyOuter>查無曲目</EmptyOuter>
+                    } 
                 </ShopInner> 
             </ShopOuter>
             <Footer />
