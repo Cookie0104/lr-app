@@ -5,6 +5,31 @@ import { Link } from 'react-router-dom';
 import { StarGrade } from '../../assets/index.js';
 import { nonStarGrade } from '../../assets/index.js';
 
+const Star = ({ n }) => {
+	// 設定基礎星星數量
+	const basic = 5;
+	// 生成綠色星星的元素
+	const greenStars = Array.from({ length: n }, (_, index) => (
+		<div
+			key={`green-${index}`}
+			className="greenstar"
+		></div>
+	));
+	// 生成灰色星星的元素，數量為基礎數量減去綠色星星的數量
+	const grayStars = Array.from({ length: basic - n }, (_, index) => (
+		<div
+			key={`gray-${index}`}
+			className="graystar"
+		></div>
+	));
+	return (
+		<Grade id="starOuter">
+			{greenStars}
+			{grayStars}
+		</Grade>
+	);
+};
+
 const Scorepage = () => {
     let { id } = useParams();
 
@@ -16,20 +41,20 @@ const Scorepage = () => {
     let NextPage = +thisDataIndex + 1 === SHOP.length ? null : SHOP[thisDataIndex + 1];
 
     //星星數量
-    window.onload = function() {
-        printStar(thisData.grade);
-    };
-    function printStar(n) {
-        let result = "";
-        for (let i = 1; i <= n; i += 1) {
-            result += "<div class='greenstar'></div>";
-        }
-        let graystar = (5 - n);
-        for(let j = 1 ; j <= graystar ; j += 1){
-            result += "<div class='graystar'></div>";
-        }
-        document.getElementById("starOuter").innerHTML = result;
-    }
+    // window.onload = function() {
+    //     printStar(thisData.grade);
+    // };
+    // function printStar(n) {
+    //     let result = "";
+    //     for (let i = 1; i <= n; i += 1) {
+    //         result += "<div class='greenstar'></div>";
+    //     }
+    //     let graystar = (5 - n);
+    //     for(let j = 1 ; j <= graystar ; j += 1){
+    //         result += "<div class='graystar'></div>";
+    //     }
+    //     document.getElementById("starOuter").innerHTML = result;
+    // }
 
     return (
         <ScorepageOuter>
@@ -38,9 +63,9 @@ const Scorepage = () => {
                     <Button color="blue">← 回樂譜列表</Button>
                 </Link>
                 <div>
-                    {PrevPage && ( <Link to={`/shop/${PrevPage.id}`}><Button onClick={() => printStar(thisData.grade)} color="blue">← 前一曲</Button></Link> )}
+                    {PrevPage && ( <Link to={`/shop/${PrevPage.id}`}><Button color="blue">← 前一曲</Button></Link> )}
                     {!PrevPage && ( <Button disabled id="prevBtn" color="blue">← 前一曲</Button> )}
-                    {NextPage && ( <Link to={`/shop/${NextPage.id}`}><Button onClick={() => printStar(thisData.grade)} color="blue">後一曲 →</Button></Link> )}
+                    {NextPage && ( <Link to={`/shop/${NextPage.id}`}><Button color="blue">後一曲 →</Button></Link> )}
                     {!NextPage && ( <Button disabled id="nextBtn" color="blue">後一曲 →</Button> )}
                 </div>
             </ButtonArea>
@@ -60,7 +85,7 @@ const Scorepage = () => {
                 <RightArea>
                     <div>
                         <Name>{thisData.name}</Name>
-                        <Grade id="starOuter"></Grade>
+                        <Star n={thisData.grade}/>
                         <Introduction>{thisData.introduction}</Introduction>
                         <TagOuter>{scoreTag.map((scoreTag) => <TagStyle>{scoreTag}</TagStyle>)}</TagOuter>
                     </div>

@@ -19,6 +19,7 @@ import ScoreList from "./score-list.js";
     
 function Shop() {
     const [searchField, setSearchField] = useState('');
+    const [selectField, setSelectField] = useState('');
     const [scores, setScores] = useState(SHOP);
     const [filteredScores, setFilteredScores] = useState(scores);
     const [hasScore, setHasScore] = useState(true);
@@ -34,8 +35,6 @@ function Shop() {
 			return score.name.toLocaleLowerCase().includes(searchField);
 		});
 		setFilteredScores(newFilteredScores);
-        console.log(newFilteredScores.length);
-        
         if(newFilteredScores.length === 0){
             setHasScore(false);
         }else{
@@ -50,9 +49,33 @@ function Shop() {
 	};
 
     const onSelectChange = (event) => {
-        
+        const selectedValue = event.target.value;
+        setSelectField(selectedValue);       
 	};
 
+    useEffect(() => {
+        console.log("目前排序",selectField);
+        if(selectField === "gradeUp"){
+            const gradeUpArr = scores.sort((a, b) => (a.grade) - (b.grade));
+            setFilteredScores(gradeUpArr);
+            console.log("gradeUpArr",gradeUpArr);
+        }else if(selectField === "gradeDown"){
+            const gradeDownArr = scores.sort((a, b) => (b.grade) - (a.grade));
+            setFilteredScores(gradeDownArr);
+            console.log("gradeDownArr",gradeDownArr);
+        }else if(selectField === "priceUp"){
+            const priceUpArr = scores.sort((a, b) => (a.price) - (b.price));
+            setFilteredScores(priceUpArr);
+            console.log("priceUpArr",priceUpArr);
+        }else if(selectField === "priceDown"){
+            const priceDownArr = scores.sort((a, b) => (b.price) - (a.price));
+            setFilteredScores(priceDownArr);
+            console.log("priceDownArr",priceDownArr);
+        };
+	}, [scores, selectField]);
+
+    
+    
     
 
     
@@ -75,7 +98,7 @@ function Shop() {
                         </SearchArea>
                         <Sorting>
                             <div>排序：</div>
-                            <SelectStyle onSelect={onSelectChange}>
+                            <SelectStyle id="sortSelected" onChange={onSelectChange}>
                                 <option selected value="priceUp">價格由低至高</option>
                                 <option value="priceDown">價格由高至低</option>
                                 <option value="gradeUp">難易度由低至高</option>
