@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import styled,{css} from "styled-components";
 
-const Title = ({title}) => {
+const Title = ({position,title}) => {
     return (
-        <TitleOuter>
+        <TitleOuter position={position}>
             <TitleStyle>{title}</TitleStyle>
         </TitleOuter>
     )
@@ -13,15 +13,39 @@ export default Title ;
 const TitleOuter = styled.div`
     width:100%;
     position:absolute;
-    top:160px;
 
-    @media screen and (min-width: 425px) and (max-width: 768px){ 
-    top:100px;
-    }
+    ${(props) => {
+        switch (props.position) {
+          case "bottom":
+            return css`
+                top:-220px;
+                
+                @media screen and (min-width: 425px) and (max-width: 768px){ 
+                    position:unset;
+                    padding:40px 0px;
+                    }
+                
+                @media screen and (max-width: 425px){ 
+                    position:unset;
+                    padding:40px 0px;
+                    }
 
-    @media screen and (max-width: 425px){ 
-    top:80px;
-    }
+              }
+            `;
+          default:
+            return css`
+                top:160px;
+
+                @media screen and (min-width: 425px) and (max-width: 768px){ 
+                    top:100px;
+                    }
+                
+                @media screen and (max-width: 425px){ 
+                    top:80px;
+                    }
+            `;
+        }
+      }}
 
 `
 const TitleStyle = styled.div`

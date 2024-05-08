@@ -1,4 +1,5 @@
 export { default as Cover1 } from "./img/cover1.png";
+export { default as Cover2 } from "./img/cover2.png";
 export { default as Teamphoto1 } from "./img/teamphoto1.png";
 export { default as Teamphoto2 } from "./img/teamphoto2.png";
 export { default as Raccoon } from "./img/raccoon.png";

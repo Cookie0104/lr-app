@@ -1,5 +1,6 @@
 import { LRLogo } from '../../assets/index.js';
 import { CartImg } from '../../assets/index.js';
+import Cart from '../../components/cart.js';
 import { Outlet } from 'react-router-dom';
 import {
   HamburgerOuter,
@@ -20,9 +21,15 @@ import { useState } from 'react';
 
 function NavigationBar() {
   const [collapse,setCollapse] = useState(false);
+  const [cart,toggleCart] = useState(false)
   const clickHandle =()=>{
     setCollapse(!collapse);
   }
+
+  const openCart =()=>{
+    toggleCart(!cart);
+  }
+
   return (
       <>
         <StyledOuter id='navbar'>
@@ -60,11 +67,15 @@ function NavigationBar() {
             <NavLink to="/shop">樂譜商店</NavLink>
             <NavLink to="/contact">聯絡我們</NavLink>
           </NavContainer>
-          <CartOuter>
+          <CartOuter onClick={openCart}>
             <CartImgOuter src={CartImg} alt="Cart"/>
             <CartInner>0</CartInner>
           </CartOuter>
         </StyledOuter>
+        {!cart &&
+          <Cart/>
+        }
+        
         <Outlet />
       </>
       

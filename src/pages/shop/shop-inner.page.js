@@ -92,7 +92,7 @@ const Scorepage = () => {
                     
                     <div>
                         <Price>$ {thisData.price}</Price>
-                        <Button color="green">＋ 加入購物車</Button>
+                        <Button id={`addToCart${thisData.id}`} color="green">＋ 加入購物車</Button>
                     </div>
                 </RightArea>
             </ScoreInfo>
