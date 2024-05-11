@@ -1,10 +1,13 @@
 import styled from "styled-components"
 
-const Textarea = ({placeholder}) => {
+const Textarea = ({placeholder,type,name,value,onChange}) => {
     return (
         <InputField 
-            type="input" 
-            placeholder={placeholder}>
+            type={type}
+            name={name}
+            value={value}
+            placeholder={placeholder}
+            onChange={onChange}>
         </InputField>
     )
 };
