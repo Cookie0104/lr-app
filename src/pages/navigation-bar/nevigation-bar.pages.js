@@ -72,7 +72,7 @@ function NavigationBar() {
             <CartInner>0</CartInner>
           </CartOuter>
         </StyledOuter>
-        {!cart &&
+        {cart &&
           <Cart/>
         }
         

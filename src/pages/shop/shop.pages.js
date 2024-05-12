@@ -30,18 +30,42 @@ function Shop() {
 			.then((name) => setScores(name));
 	}, []);
 
-	useEffect(() => {
-		const newFilteredScores = scores.filter((score) => {
-			return score.name.toLocaleLowerCase().includes(searchField);
-		});
-		setFilteredScores(newFilteredScores);
-        if(newFilteredScores.length === 0){
-            setHasScore(false);
-        }else{
-            setHasScore(true);
-        };
+	// useEffect(() => {
+	// 	let newFilteredScores = scores.filter((score) => {
+	// 		return score.name.toLocaleLowerCase().includes(searchField);
+	// 	});
+	// 	setFilteredScores(newFilteredScores);
+    //     if(newFilteredScores.length === 0){
+    //         setHasScore(false);
+    //     }else{
+    //         setHasScore(true);
+    //     };
 
-	}, [scores, searchField]);
+	// }, [scores, searchField]);
+
+    useEffect(() => {
+		let updatedScores = scores.filter((score) =>
+			score.name.toLocaleLowerCase().includes(searchField)
+		);
+		switch (selectField) {
+			case 'gradeUp':
+				updatedScores.sort((a, b) => a.grade - b.grade);
+				break;
+			case 'gradeDown':
+				updatedScores.sort((a, b) => b.grade - a.grade);
+				break;
+			case 'priceUp':
+				updatedScores.sort((a, b) => a.price - b.price);
+				break;
+			case 'priceDown':
+				updatedScores.sort((a, b) => b.price - a.price);
+				break;
+			default:
+				break;
+		}
+		setFilteredScores(updatedScores);
+		setHasScore(updatedScores.length > 0);
+	}, [scores, searchField, selectField]); //[裡面是啥意思]何時該用useEffect
 
 	const onSearchChange = (event) => {
 		const searchFieldString = event.target.value.toLocaleLowerCase();
@@ -53,26 +77,26 @@ function Shop() {
         setSelectField(selectedValue);       
 	};
 
-    useEffect(() => {
-        console.log("目前排序",selectField);
-        if(selectField === "gradeUp"){
-            const gradeUpArr = scores.sort((a, b) => (a.grade) - (b.grade));
-            setFilteredScores(gradeUpArr);
-            console.log("gradeUpArr",gradeUpArr);
-        }else if(selectField === "gradeDown"){
-            const gradeDownArr = scores.sort((a, b) => (b.grade) - (a.grade));
-            setFilteredScores(gradeDownArr);
-            console.log("gradeDownArr",gradeDownArr);
-        }else if(selectField === "priceUp"){
-            const priceUpArr = scores.sort((a, b) => (a.price) - (b.price));
-            setFilteredScores(priceUpArr);
-            console.log("priceUpArr",priceUpArr);
-        }else if(selectField === "priceDown"){
-            const priceDownArr = scores.sort((a, b) => (b.price) - (a.price));
-            setFilteredScores(priceDownArr);
-            console.log("priceDownArr",priceDownArr);
-        };
-	}, [scores, selectField]);
+    // useEffect(() => {
+    //     console.log("目前排序",selectField);
+    //     if(selectField === "gradeUp"){
+    //         const gradeUpArr = scores.sort((a, b) => (a.grade) - (b.grade));
+    //         setFilteredScores(gradeUpArr);
+    //         console.log("gradeUpArr",gradeUpArr);
+    //     }else if(selectField === "gradeDown"){
+    //         const gradeDownArr = scores.sort((a, b) => (b.grade) - (a.grade));
+    //         setFilteredScores(gradeDownArr);
+    //         console.log("gradeDownArr",gradeDownArr);
+    //     }else if(selectField === "priceUp"){
+    //         const priceUpArr = scores.sort((a, b) => (a.price) - (b.price));
+    //         setFilteredScores(priceUpArr);
+    //         console.log("priceUpArr",priceUpArr);
+    //     }else if(selectField === "priceDown"){
+    //         const priceDownArr = scores.sort((a, b) => (b.price) - (a.price));
+    //         setFilteredScores(priceDownArr);
+    //         console.log("priceDownArr",priceDownArr);
+    //     };
+	// }, [scores, selectField]);
 
     
     

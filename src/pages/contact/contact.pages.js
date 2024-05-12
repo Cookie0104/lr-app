@@ -22,6 +22,7 @@ const Contact = () => {
     });
 
     const [loading,setLoading] = useState(false);
+    const [hasFillIn,setHasFillIn] = useState(false);
 
     const container = useRef(null);
 
@@ -40,6 +41,12 @@ const Contact = () => {
             ...form,
             [name]: value
         })
+        if( form.name != "" && form.email != "" && form.message != ""){
+            setHasFillIn(true);
+        }else{
+            setHasFillIn(false);
+        }
+        console.log(hasFillIn);
     };
 
     const handleSubmit = (e) =>{
@@ -52,7 +59,7 @@ const Contact = () => {
             to_email : "lrlrlrpercussion@gmail.com",
             message : form.message,
         },PUBLIC_KEY
-    ).then(() => {setLoading(false);setForm({
+        ).then(() => {setLoading(false);setForm({
             name : "",
             email : "",
             message : "" 
@@ -70,7 +77,8 @@ const Contact = () => {
                     <Input type="text" name="name" value={form.name} placeholder="請輸入暱稱" onChange={handleChange}></Input>
                     <Input type="email" name="email" value={form.email} placeholder="請輸入Email" onChange={handleChange}></Input>
                     <Textarea name="message" value={form.message} placeholder="想跟我們說些什麼" onChange={handleChange}></Textarea>
-                    <Button type="submit" name="送出"></Button>
+                    {hasFillIn && <Button id="submitBtn" type="submit" name="送出"></Button>}
+                    {!hasFillIn && <Button id="submitBtn" type="submit" name="送出" disabled="disabled"></Button>}
                 </InputOuter>
             </InputBackGround>
             <Footer/>
@@ -156,5 +164,15 @@ width:100%;
     letter-spacing:2px;
     text-align:center;
     line-height:40px;
+    width:100px;
+
+    position:absolute;
+    top:calc(50% - 40px);
+    left:calc(50% - 50px)
+}
+
+& div{
+    width:fit-content;
+    height:fit-content;
 }
 `
