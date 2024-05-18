@@ -1,14 +1,18 @@
-import styled from 'styled-components';
-import { useState,useEffect,useRef } from 'react';
+import { useState,useEffect } from 'react';
 import { Cover2 } from '../../assets/index';
 import { CoverPhoto } from '../../components/coverphoto';
-import Lottie from 'lottie-web';
 import Footer from '../../components/footer';
 import Title from '../../components/title';
 import Input from '../../components/inputField';
 import Textarea from '../../components/textarea';
 import Button from '../../components/button';
 import emailjs from "@emailjs/browser";
+import LottieAnimate from './animate';
+import {
+    InputBackGround,
+    InputOuter,
+    Mask
+}from "./contact.style"
 
 const SERVICE_ID = "service_648r2pu";
 const TEMPLATE_ID = "template_vii04oh";
@@ -24,16 +28,9 @@ const Contact = () => {
     const [loading,setLoading] = useState(false);
     const [hasFillIn,setHasFillIn] = useState(false);
 
-    const container = useRef(null);
-
     useEffect(()=>{
-        Lottie.loadAnimation({
-            container:container.current,
-            renderer:"svg",
-            autoplay: true,
-            animationData:require("../../assets/lottie/loading.json")
-        });
-    },[])
+        form.name !== "" && form.email !== "" && form.message !== "" ? setHasFillIn(true) : setHasFillIn(false)
+    },[form]);
 
     const handleChange = (e) => {
         const { name , value } = e.target
@@ -41,12 +38,6 @@ const Contact = () => {
             ...form,
             [name]: value
         })
-        if( form.name != "" && form.email != "" && form.message != ""){
-            setHasFillIn(true);
-        }else{
-            setHasFillIn(false);
-        }
-        console.log(hasFillIn);
     };
 
     const handleSubmit = (e) =>{
@@ -83,96 +74,21 @@ const Contact = () => {
             </InputBackGround>
             <Footer/>
             {loading &&
-                <Mask id='maskkk'>
-                    <p>傳送中...</p>
-                    <div ref={container}></div>
+                <Mask id='mask'>
+                    <div id='maskOuter'>
+                        <LottieAnimate/>
+                        <p>傳送中...</p>
+                    </div>
                 </Mask>
             }
-            {/* <Mask id='maskkk'>
-                <p>傳送中...</p>
-                <div ref={container}></div>
+            {/* <Mask id='mask'>
+                <div id='maskOuter'>
+                    <LottieAnimate/>
+                    <p>傳送中...</p>
+                </div>
             </Mask> */}
         </div>
     )
 };
 
 export default Contact ;
-
-const InputBackGround = styled.div`
-background:#384551;
-width:100%;
-height:200px;
-position:relative;
-display:flex;
-align-items: center;
-justify-content: center;
-
-@media screen and (min-width: 425px) and (max-width: 768px){ 
-    position:relative;
-    height:fit-content;
-    display:block;
-    }
-
-@media screen and (max-width: 425px){ 
-    position:relative;
-    height:fit-content;
-    display:block;
-    }
-`
-const InputOuter = styled.form`
-background:#F3F3F3;
-width:50%;
-min-width:420px;
-height:calc(100% + 100px - 40px);
-padding:20px 30px;
-position:absolute;
-top:-100px;
-border-radius:4px;
-display:flex;
-flex-direction:column;
-gap:16px;
-
-@media screen and (min-width: 425px) and (max-width: 768px){ 
-    position:unset;
-    height:fit-content;
-    top:unset;
-    margin:0 auto;
-    }
-
-@media screen and (max-width: 425px){ 
-    position:unset;
-    height:fit-content;
-    width:calc(100% - 32px);
-    margin:0 auto;
-    min-width:unset;
-    padding:20px 16px;
-    border-radius:0px;
-    }
-`
-
-const Mask = styled.div`
-position:fixed;
-background:#384551ab;
-top:0;
-right:0;
-z-index:200;
-height:100vh;
-width:100%;
-
-& p{
-    color:#fff;
-    letter-spacing:2px;
-    text-align:center;
-    line-height:40px;
-    width:100px;
-
-    position:absolute;
-    top:calc(50% - 40px);
-    left:calc(50% - 50px)
-}
-
-& div{
-    width:fit-content;
-    height:fit-content;
-}
-`

@@ -8,9 +8,9 @@ const Footer = () => {
         <FooterOuter>
             <LinkOuter>
                 <LinkInner>
-                    <a href="https://www.facebook.com/lrpercussion" target="_blank"><img src={Facebook} alt="fb"/></a>
-                    <a href="https://instagram.com/lr_percussion" target="_blank"><img src={Instagram} alt="ig" /></a>
-                    <a href="https://www.youtube.com/@lrpercussion3766" target="_blank"><img src={Youtube} alt="yt" /></a>
+                    <a href="https://www.facebook.com/lrpercussion" rel="noreferrer" target="_blank"><img src={Facebook} alt="fb"/></a>
+                    <a href="https://instagram.com/lr_percussion" rel="noreferrer" target="_blank"><img src={Instagram} alt="ig" /></a>
+                    <a href="https://www.youtube.com/@lrpercussion3766" rel="noreferrer" target="_blank"><img src={Youtube} alt="yt" /></a>
                 </LinkInner>
                 <Copyright>2022 © LR Slashie</Copyright>
             </LinkOuter>

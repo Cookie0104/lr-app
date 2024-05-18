@@ -1,9 +1,11 @@
 import styled,{css} from "styled-components";
 import SHOP from "../../data/SHOP.json";
-import { useParams } from 'react-router-dom';
+import { useParams} from 'react-router-dom';
+import { useContext} from 'react';
 import { Link } from 'react-router-dom';
 import { StarGrade } from '../../assets/index.js';
 import { nonStarGrade } from '../../assets/index.js';
+import { CartContext,CartProvider } from "../../components/cart/cart.context.js";
 
 const Star = ({ n }) => {
 	// 設定基礎星星數量
@@ -31,6 +33,7 @@ const Star = ({ n }) => {
 };
 
 const Scorepage = () => {
+
     let { id } = useParams();
 
     //指定Data
@@ -55,6 +58,10 @@ const Scorepage = () => {
     //     }
     //     document.getElementById("starOuter").innerHTML = result;
     // }
+    const { addItemToCart } = useContext(CartContext);
+    const addProductToCart = () => {
+        addItemToCart(thisData);
+        console.log(CartContext);}
 
     return (
         <ScorepageOuter>
@@ -92,7 +99,7 @@ const Scorepage = () => {
                     
                     <div>
                         <Price>$ {thisData.price}</Price>
-                        <Button id={`addToCart${thisData.id}`} color="green">＋ 加入購物車</Button>
+                        <Button id={`addToCart${thisData.id}`} color="green" onClick={addProductToCart}>＋ 加入購物車</Button>
                     </div>
                 </RightArea>
             </ScoreInfo>

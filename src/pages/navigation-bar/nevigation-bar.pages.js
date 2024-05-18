@@ -1,6 +1,6 @@
 import { LRLogo } from '../../assets/index.js';
 import { CartImg } from '../../assets/index.js';
-import Cart from '../../components/cart.js';
+import Cart from '../../components/cart/cart.js';
 import { Outlet } from 'react-router-dom';
 import {
   HamburgerOuter,
