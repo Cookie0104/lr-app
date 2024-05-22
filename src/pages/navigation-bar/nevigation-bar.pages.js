@@ -18,17 +18,25 @@ import {
   CartImgOuter,
 } from './navigation.styles';
 import { useState } from 'react';
+import { CartContext } from "../../components/cart/cart.context.js";
+import { useContext } from 'react';
 
 function NavigationBar() {
   const [collapse,setCollapse] = useState(false);
-  const [cart,toggleCart] = useState(false)
+
+  //const [cart,toggleCart] = useState(false)
   const clickHandle =()=>{
     setCollapse(!collapse);
   }
 
+  const { isCartsOpen } = useContext(CartContext);
+  const { setIsCartOpen } = useContext(CartContext);
   const openCart =()=>{
-    toggleCart(!cart);
+    setIsCartOpen(!isCartsOpen);
   }
+
+  
+  
 
   return (
       <>
@@ -72,7 +80,7 @@ function NavigationBar() {
             <CartInner>0</CartInner>
           </CartOuter>
         </StyledOuter>
-        {cart &&
+        {isCartsOpen &&
           <Cart/>
         }
         

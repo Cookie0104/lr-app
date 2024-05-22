@@ -4,15 +4,18 @@ import { createContext, useState, useEffect } from 'react';
 const addCartItem = (cartItems, productToAdd) => {
 	// find if cartItem contains productToAdd
 	const existingCartItem = cartItems.find((cartItem) => cartItem.id === productToAdd.id);
-	// if found, increment quantity
-	if (existingCartItem)
-		return cartItems.map((cartItem) =>
-			cartItem.id === productToAdd.id
-				? { ...cartItem, quantity: cartItem.quantity + 1 }
-				: cartItem
-		);
+    console.log(productToAdd);
+    
+	//if found, increment quantity 如果已經有的話
+	// if (existingCartItem)
+	// 	return cartItems.map((cartItem) =>
+	// 		cartItem.id === productToAdd.id
+	// 			? { ...cartItem }
+	// 			: cartItem
+	// 	);
 	// return new array with modified cartItems / new cart item
-	return [...cartItems, { ...productToAdd, quantity: 1 }];
+	return  [...cartItems, productToAdd];
+    
 };
 
 export const CartContext = createContext({
@@ -28,6 +31,7 @@ export const CartContext = createContext({
 
 export const CartProvider = ({ children }) => {
 	const [isCartsOpen, setIsCartOpen] = useState(false);
+    const [isItemExist, setisItemExist] = useState(false);
 	const [cartItems, setCartItems] = useState([]);
 	const [cartCount, setCartCount] = useState(0);
 	const [cartTotal, setCartTotal] = useState(0);
@@ -53,6 +57,13 @@ export const CartProvider = ({ children }) => {
 		setCartItems(addCartItem(cartItems, productToAdd));
 	};
 
+    const checkIfItemExist = (productToAdd) =>{
+        const existingCartItem = cartItems.find((cartItem) => cartItem.id === productToAdd.id);
+        if (existingCartItem){
+            setisItemExist(true);
+        }
+    }
+
 	// const removeItemFromCart = (cartItemToRemove) => {
 	// 	setCartItems(removeCartItem(cartItems, cartItemToRemove));
 	// };
@@ -64,8 +75,11 @@ export const CartProvider = ({ children }) => {
 	const value = {
 		isCartsOpen,
 		setIsCartOpen,
+        isItemExist,
+        setisItemExist,
 		cartItems,
 		addItemToCart,
+        checkIfItemExist,
 		// removeItemFromCart,
 		// clearItemFromCart,
 		cartCount,
