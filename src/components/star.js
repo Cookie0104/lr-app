@@ -1,6 +1,6 @@
 import {
     Grade
-} from "../pages/shop/shop-inner.page.style"
+} from "../pages/shop/shop-inner.page/shop-inner.page.style"
 
 const Star = ({ n }) => {
 	// 設定基礎星星數量

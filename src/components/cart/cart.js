@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import SHOP from "../../data/SHOP.json";
 import { CartContext } from "../cart/cart.context";
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Button } from "../../pages/shop/shop-inner.page/shop-inner.page.style";
 
 function CartContent({ name,price }) {
   return (
@@ -14,6 +15,14 @@ function CartContent({ name,price }) {
 
 const Cart = () => {
   const { cartItems } = useContext(CartContext);
+  const { cartTotal } = useContext(CartContext);
+  const { clearItemFromCart } = useContext(CartContext);
+  const navigate = useNavigate();
+
+  const goToCheckoutHandler = () => {
+		navigate('/checkout');
+	};
+
   return (
     <>
       <Outer>
@@ -22,8 +31,10 @@ const Cart = () => {
           {cartItems.map((score) => (
             <CartContent key={score.id} name={score.name} price={score.price}/>
           ))}
-            <div></div>
+            <div>總額：{cartTotal}</div>
         </div>
+        <Button onClick={goToCheckoutHandler}>結帳</Button>
+        <Button onClick={clearItemFromCart}>清空購物車</Button>
       </Outer>
     </>
   );

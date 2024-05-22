@@ -7,8 +7,9 @@ import Music from './pages/music/music.pages';
 import Shop from './pages/shop/shop.pages';
 import Slashie from './pages/slashie/slashie.pages';
 import Contact from './pages/contact/contact.pages';
-import Scorepage from './pages/shop/shop-inner.page';
+import Scorepage from './pages/shop/shop-inner.page/shop-inner.page';
 import SHOP from './data/SHOP.json';
+import Checkout from './pages/checkout/checkout.page';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path='/shop' element={<Shop />} />
         <Route path='/contact' element={<Contact/>} />
         <Route path='/shop/:id' element={<Scorepage data={SHOP}/>} />
+        <Route path='/checkout' element={<Checkout/>} />
       </Route>
     </Routes>
   );

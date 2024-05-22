@@ -35,6 +35,8 @@ function NavigationBar() {
     setIsCartOpen(!isCartsOpen);
   }
 
+  const { cartCount } = useContext(CartContext);
+
   
   
 
@@ -77,7 +79,7 @@ function NavigationBar() {
           </NavContainer>
           <CartOuter onClick={openCart}>
             <CartImgOuter src={CartImg} alt="Cart"/>
-            <CartInner>0</CartInner>
+            <CartInner>{cartCount}</CartInner>
           </CartOuter>
         </StyledOuter>
         {isCartsOpen &&
