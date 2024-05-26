@@ -18,4 +18,5 @@ export { default as Youtube } from './icon/yt.svg';
 export { default as Search } from './icon/search.svg';
 export { default as StarGrade } from './icon/greenstar.svg';
 export { default as nonStarGrade } from './icon/graystar.svg';
+export { default as Delete } from './icon/delete.svg';
 

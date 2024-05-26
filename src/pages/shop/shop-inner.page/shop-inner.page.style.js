@@ -26,7 +26,7 @@ export const Button = styled.button`
 
 border: none;
 color: white;
-padding: 8px 48px;
+padding: 8px 40px;
 text-align: center;
 text-decoration: none;
 display: inline-block;
@@ -50,6 +50,21 @@ switch (props.color) {
             color:#848D96;
         }
     `;
+    case "outline":
+        return css`
+        background:none;
+        border:1px solid #899385;
+        color:#899385;
+        padding: 7px 24px;
+        &:hover{
+            background:rgba(137, 147, 133, 0.1);
+        }
+
+        &:disabled{
+            background:#484E53;
+            color:#848D96;
+        }
+        `;
     default:
     return css`
         background:#899385;
@@ -64,8 +79,12 @@ switch (props.color) {
         }
     `;
 }
+
 }}
 
+&#checkOutBtn{
+    width:100%;
+  }
 `
 
 export const ScoreInfo = styled.div`
@@ -107,7 +126,7 @@ color:#384551;
     display:flex;
     flex-direction:column;
     border-bottom:1px solid rgba(137,147,133,0.5);
-    padding:28px 56px;
+    padding:28px 40px;
 }
 
 & div button{
