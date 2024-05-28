@@ -1,5 +1,6 @@
 import SHOP from "../../../data/SHOP.json";
 import { useParams } from "react-router-dom";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Star from "../../../components/star.js";
 import {
@@ -17,11 +18,23 @@ import {
   Price,
   Arranger,
   Audio,
+  AddtoCartArea,
 } from "./shop-inner.page.style.js";
 import AddToCartBtn from "./addToCartBtn.js";
 
 const Scorepage = () => {
   let { id } = useParams();
+
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  window.onload =() => {
+    let windowWidth = document.body.offsetWidth;
+    windowWidth <= 425 ? setIsSmallScreen(true) : setIsSmallScreen(false);
+  }
+  window.onresize = () => {
+    let windowWidth = document.body.offsetWidth;
+    windowWidth <= 425 ? setIsSmallScreen(true) : setIsSmallScreen(false);
+  };
 
   //指定Data
   const thisData = SHOP.find((SHOP) => SHOP.id === id);
@@ -37,29 +50,32 @@ const Scorepage = () => {
         <Link to="/shop">
           <Button color="blue">← 回樂譜列表</Button>
         </Link>
-        <div>
-          {PrevPage && (
-            <Link to={`/shop/${PrevPage.id}`}>
-              <Button color="blue">← 前一曲</Button>
-            </Link>
-          )}
-          {!PrevPage && (
-            <Button disabled id="prevBtn" color="blue">
-              ← 前一曲
-            </Button>
-          )}
-          {NextPage && (
-            <Link to={`/shop/${NextPage.id}`}>
-              <Button color="blue">後一曲 →</Button>
-            </Link>
-          )}
-          {!NextPage && (
-            <Button disabled id="nextBtn" color="blue">
-              後一曲 →
-            </Button>
-          )}
-        </div>
+        {!isSmallScreen && (
+          <div>
+            {PrevPage && (
+              <Link to={`/shop/${PrevPage.id}`}>
+                <Button color="blue">← 前一曲</Button>
+              </Link>
+            )}
+            {!PrevPage && (
+              <Button disabled id="prevBtn" color="blue">
+                ← 前一曲
+              </Button>
+            )}
+            {NextPage && (
+              <Link to={`/shop/${NextPage.id}`}>
+                <Button color="blue">後一曲 →</Button>
+              </Link>
+            )}
+            {!NextPage && (
+              <Button disabled id="nextBtn" color="blue">
+                後一曲 →
+              </Button>
+            )}
+          </div>
+        )}
       </ButtonArea>
+
       <ScoreInfo>
         <LeftArea>
           <div>
@@ -84,15 +100,54 @@ const Scorepage = () => {
               ))}
             </TagOuter>
           </div>
-          <div>
-            <Price>$ {thisData.price}</Price>
-            <AddToCartBtn
-              thisData={thisData}
-              id={`addToCart${thisData.id}`}
-              color="green"
-            />
-          </div>
+
+          {!isSmallScreen && (
+            <div>
+              <Price>$ {thisData.price}</Price>
+              <AddToCartBtn
+                thisData={thisData}
+                id={`addToCart${thisData.id}`}
+                color="green"
+              />
+            </div>
+          )}
         </RightArea>
+        {isSmallScreen && (
+          <AddtoCartArea>
+            <Price>$ {thisData.price}</Price>
+            <div>
+              {PrevPage && (
+                <Link to={`/shop/${PrevPage.id}`}>
+                  <Button color="blue">← 前一曲</Button>
+                </Link>
+              )}
+              {!PrevPage && (
+                <div>
+                  <Button disabled id="prevBtn" color="blue">
+                    ← 前一曲
+                  </Button>
+                </div>
+              )}
+              {NextPage && (
+                <Link to={`/shop/${NextPage.id}`}>
+                  <Button color="blue">後一曲 →</Button>
+                </Link>
+              )}
+              {!NextPage && (
+                <div>
+                  <Button disabled id="nextBtn" color="blue">
+                    後一曲 →
+                  </Button>
+                </div>
+              )}
+              <AddToCartBtn
+                thisData={thisData}
+                id={`addToCart${thisData.id}`}
+                color="green"
+              />
+            </div>
+          </AddtoCartArea>
+        )}
       </ScoreInfo>
     </ScorepageOuter>
   );

@@ -45,6 +45,14 @@ const CartContentName = styled.div`
   font-weight: bold;
   color: #384551;
   line-height: 30px;
+
+  @media screen and (min-width: 425px) and (max-width: 768px){ 
+    font-size: 16px;
+  }
+
+  @media screen and (max-width: 425px){ 
+    font-size: 16px;
+  }
 `;
 const CartContentPrice = styled.div`
   font-size: 18px;
@@ -119,6 +127,18 @@ const Outer = styled.div`
   border-radius: 4px;
   box-shadow: #0000001f 0px 0px 10px 0px;
   padding: 8px 0px;
+
+  @media screen and (min-width: 425px) and (max-width: 768px){ 
+    top: 60px;
+  }
+
+  @media screen and (max-width: 425px){ 
+    top: 60px;
+    right: 0px;
+    width: 100%;
+    border-radius: 0px;
+    box-shadow: unset;
+  }
 `;
 
 const ScrollOuter = styled.div`

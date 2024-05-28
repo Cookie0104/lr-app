@@ -94,11 +94,23 @@ const CheckoutOuter = styled.div`
   background: linear-gradient(to top, #384551, #242424);
   color: #fff;
   margin-top: 100px;
+
+  @media screen and (min-width: 425px) and (max-width: 768px){ 
+    margin-top: 70px;
+    min-height: calc(100vh - 70px);
+  }
+
+  @media screen and (max-width: 425px){ 
+    margin-top: 60px;
+    min-height: calc(100vh - 60px);
+  }
 `;
 
 const CartContentOuter = styled.div`
   border-bottom: 1px solid rgba(137, 147, 133, 0.3);
   padding: 16px 24px;
+
+  
   &:hover {
     background: rgba(137, 147, 133, 0.05);
   }
@@ -122,6 +134,8 @@ const CartContentOuter = styled.div`
     margin: 0px 24px 0px 0px;
     max-width: 100px;
   }
+
+  
 `;
 
 const CartInner = styled.div`
@@ -172,6 +186,19 @@ const ScoreInfo = styled.div`
   gap: 40px;
   padding-bottom: 80px;
   padding-top: 220px;
+
+  @media screen and (min-width: 425px) and (max-width: 768px){ 
+    padding-top: 130px;
+    gap:24px;
+  }
+
+  @media screen and (max-width: 425px){ 
+    padding-top: 90px;
+    flex-direction:column;
+    align-items: center;
+    gap:0px;
+  }
+  
 `;
 
 const LeftArea = styled.div`
@@ -182,12 +209,30 @@ const LeftArea = styled.div`
   font-size: 16px;
   font-weight: bold;
 
+  @media screen and (min-width: 425px) and (max-width: 768px){ 
+    width:calc(60% - 12px - 40px);
+  }
+
+  @media screen and (max-width: 425px){ 
+    width:calc(100% - 32px);
+  }
+
   & > div {
     display: flex;
     flex-direction: column;
     border-bottom: 1px solid rgba(137, 147, 133, 0.5);
     padding: 32px 48px;
     width: calc(100% - 96px);
+
+    @media screen and (min-width: 425px) and (max-width: 768px){ 
+      padding:24px 32px;
+      width:calc(100% - 64px);
+    }
+  
+    @media screen and (max-width: 425px){ 
+      padding:32px 40px;
+      width:calc(100% - 80px);
+    }
   }
 `;
 
@@ -207,9 +252,18 @@ export const RightArea = styled.div`
   color: #384551;
   padding-bottom:16px;
 
+  @media screen and (min-width: 425px) and (max-width: 768px){ 
+    width:calc(40% - 12px - 40px);
+  }
+
+  @media screen and (max-width: 425px){ 
+    width:calc(100% - 32px);
+  }
+
   & div button {
     width: 100%;
     margin: 0px 0px 16px 0px;
+    
   }
 `;
 
@@ -218,11 +272,30 @@ display:flex;
 gap:16px;
 flex-direction: row;
 padding: 0px 32px 0px 32px;
+
+@media screen and (min-width: 425px) and (max-width: 768px){ 
+  padding: 0px 24px 0px 24px;
+  flex-direction:column;
+  gap:0px;
+}
+
+@media screen and (max-width: 425px){ 
+  padding: 0px 24px 0px 24px;
+}
+
 `
 const TotalArea = styled.div`
 padding:40px 32px;
 color:#899385;
 display:flex;
-font-size:24px;
+font-size:18px;
 font-weight:bold;
+
+@media screen and (min-width: 425px) and (max-width: 768px){ 
+  padding:32px 24px;
+}
+
+@media screen and (max-width: 425px){ 
+  padding:32px 24px;
+}
 `
