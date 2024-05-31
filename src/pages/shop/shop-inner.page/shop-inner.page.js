@@ -21,20 +21,24 @@ import {
   AddtoCartArea,
 } from "./shop-inner.page.style.js";
 import AddToCartBtn from "./addToCartBtn.js";
+import Resize from "../../../components/resize.js";
 
 const Scorepage = () => {
   let { id } = useParams();
 
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
-  window.onload =() => {
-    let windowWidth = document.body.offsetWidth;
-    windowWidth <= 425 ? setIsSmallScreen(true) : setIsSmallScreen(false);
-  }
-  window.onresize = () => {
-    let windowWidth = document.body.offsetWidth;
-    windowWidth <= 425 ? setIsSmallScreen(true) : setIsSmallScreen(false);
-  };
+  // window.onload =() => {
+  //   let windowWidth = document.body.offsetWidth;
+  //   windowWidth <= 425 ? setIsSmallScreen(true) : setIsSmallScreen(false);
+  // }
+  // window.onresize = () => {
+  //   let windowWidth = document.body.offsetWidth;
+  //   windowWidth <= 425 ? setIsSmallScreen(true) : setIsSmallScreen(false);
+  // };
+
+  const { height, width } = Resize();
+  console.log(height,width);
 
   //指定Data
   const thisData = SHOP.find((SHOP) => SHOP.id === id);
@@ -50,7 +54,7 @@ const Scorepage = () => {
         <Link to="/shop">
           <Button color="blue">← 回樂譜列表</Button>
         </Link>
-        {!isSmallScreen && (
+        {width >= 425 ? (
           <div>
             {PrevPage && (
               <Link to={`/shop/${PrevPage.id}`}>
@@ -73,7 +77,7 @@ const Scorepage = () => {
               </Button>
             )}
           </div>
-        )}
+        ): null}
       </ButtonArea>
 
       <ScoreInfo>
@@ -101,7 +105,7 @@ const Scorepage = () => {
             </TagOuter>
           </div>
 
-          {!isSmallScreen && (
+          {width >= 425 ? (
             <div>
               <Price>$ {thisData.price}</Price>
               <AddToCartBtn
@@ -110,9 +114,9 @@ const Scorepage = () => {
                 color="green"
               />
             </div>
-          )}
+          ) : null}
         </RightArea>
-        {isSmallScreen && (
+        {width <= 425 ? (
           <AddtoCartArea>
             <Price>$ {thisData.price}</Price>
             <div>
@@ -147,7 +151,7 @@ const Scorepage = () => {
               />
             </div>
           </AddtoCartArea>
-        )}
+        ):null}
       </ScoreInfo>
     </ScorepageOuter>
   );
