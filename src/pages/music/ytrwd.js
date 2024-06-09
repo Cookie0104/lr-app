@@ -1,6 +1,10 @@
-import styled from "styled-components";
 import YTLINK from "../../data/YTLINK.json";
 import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import YouTube from "react-youtube";
+import {Videobox} from "./music.style";
+import "./slider.css"
 
 export default function RwdYoutube() {
   const settings = {
@@ -18,33 +22,32 @@ export default function RwdYoutube() {
       },
     ],
   };
+  const opts = {
+    height: "100%",
+    width: "100%",
+    playerVars: {
+      // https://developers.google.com/youtube/player_parameters
+      autoplay: false,
+    },
+  };
   return (
-    <Slider {...settings}>
-      <Videobox>
-        {YTLINK.map((vidio) => {
-          return <iframe src={vidio.link} allowFullScreen="true" />;
+    <Videobox>
+      <Slider {...settings}>
+        {YTLINK.map(({ link }) => {
+          return (
+              <YouTube videoId={link} opts={opts} />
+          );
         })}
-      </Videobox>
-    </Slider>
+      </Slider>
+      {/* {YTLINK.map(({ link }, index) => {
+        //return (
+          // <div class="ytyt">
+          //   <iframe src={link} title={index} allowFullScreen="true" />
+          // </div>
+       // );
+      })} */}
+    </Videobox>
+
   );
+  
 }
-
-const Videobox = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  & iframe {
-    top: 0;
-    left: 0;
-    width: calc(55vh / 9 * 16);
-    max-width: 80vw;
-    height: 55vh;
-    max-height: calc(80vw / 16 * 9);
-    z-index: 2;
-  }
-`;
