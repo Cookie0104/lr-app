@@ -26,7 +26,7 @@ import Resize from "../../../components/resize.js";
 const Scorepage = () => {
   let { id } = useParams();
 
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  // const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   // window.onload =() => {
   //   let windowWidth = document.body.offsetWidth;

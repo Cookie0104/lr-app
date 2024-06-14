@@ -1,3 +1,4 @@
+import { useState,useEffect } from 'react';
 import { Cover3 } from "../../assets/index";
 import Footer from "../../components/footer";
 import Subtitle from "../../components/subtitle";
@@ -14,6 +15,11 @@ import {CoverPhoto,
 } from "./music.style"
 
 const Music = () => {
+  const [isPaused, setIsPaused] = useState(false);
+  const togglePause = () => {
+    setIsPaused(!isPaused);
+  };
+
   return (
     <div>
       <div id="banner">
