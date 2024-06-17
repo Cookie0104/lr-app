@@ -16,7 +16,7 @@ export const CoverPhoto = styled.img`
 export const MusicOuter = styled.div`
   width: 100%;
   height: fit-content;
-  background: linear-gradient(#242424, #384551);
+  background: linear-gradient(#384551, #242424);
   position: relative;
   padding: 40px 0px;
 `;

@@ -2,6 +2,7 @@
     width:90%;
     max-width:400px;
     position: absolute;
+    z-index:3;
 
     @media screen and (min-width: 425px) and (max-width: 768px){ 
         width:70%;
@@ -52,25 +53,29 @@
 }
 
 .photo.position2::before{
-    content:"123456789";
-    z-index:200;
-    position:absolute;
-    top:-30px;
-    right:-30px;
-    display:block;
-    width:100px;
-    height:100px;
-    background:#fff;
-}
-
-.beforetest::after{
-    content:"123456789";
-    z-index:200;
+    content:"";
     position:absolute;
     top:-20px;
-    right:-30px;
+    right:0px;
     display:block;
-    width:100px;
+    width:50%;
     height:100px;
-    background:#fff;
+    border:1px solid #fff;
 }
+
+
+.beforetest{
+    width:fit-content;
+    height:fit-content;
+}
+
+/* .beforetest::after{
+    content:"";
+    position:absolute;
+    top:-20px;
+    right:0px;
+    display:block;
+    width:50%;
+    height:100px;
+    border:1px solid #fff;
+} */

@@ -40,9 +40,13 @@ export const WorksContainer = styled.div`
   cursor: pointer;
 
   @media screen and (min-width: 425px) and (max-width: 768px) {
+    width: calc((100% - 72px) / 3);
+    min-width:200px;
   }
 
   @media screen and (max-width: 425px) {
+  width: 100%;
+  margin-bottom:24px;
   }
 `;
 

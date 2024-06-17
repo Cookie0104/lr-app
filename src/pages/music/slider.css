@@ -29,7 +29,7 @@
     background:#38455140;
 }
 
-.slick-prev:focus, .slick-next:focus{
+.slick-prev:active, .slick-next:active{
     background:#38455199;
 }
 

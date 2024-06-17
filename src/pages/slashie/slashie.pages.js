@@ -114,4 +114,15 @@ const WorksOuter = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 40px 8vw;
+
+  @media screen and (min-width: 425px) and (max-width: 768px) {
+    flex-wrap: wrap;
+    gap:24px;
+    justify-content: space-around;
+  }
+
+  @media screen and (max-width: 425px) {
+    justify-content: space-between;
+    flex-direction: column;
+  }
 `;
