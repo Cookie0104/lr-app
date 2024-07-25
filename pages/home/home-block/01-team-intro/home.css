@@ -1,0 +1,81 @@
+.photo{
+    width:90%;
+    max-width:400px;
+    position: absolute;
+    z-index:3;
+
+    @media screen and (min-width: 425px) and (max-width: 768px){ 
+        width:70%;
+        max-width:300px;
+    }
+    @media screen and (max-width: 425px){ 
+        width:70%;
+      }
+    
+}
+
+.position1{
+    bottom: 100% ;
+    left:-8vw;
+
+    @media screen and (min-width: 425px) and (max-width: 768px){ 
+        top: 0;
+        left:0;
+        bottom:unset;
+    }
+    @media screen and (max-width: 425px){ 
+        top: 0;
+        left:0;
+        bottom:unset;
+      }
+}
+
+.photo.position2{
+    top:-60px;
+    right:8vw;
+    width:calc(100% - 100px);
+    max-width:300px;
+    
+    @media screen and (min-width: 425px) and (max-width: 768px){ 
+        right: 0;
+        bottom:0;
+        top:unset;
+        width:70%;
+    }
+
+    @media screen and (max-width: 425px){ 
+        right: 0;
+        bottom:0;
+        top:unset;
+        max-width:300px;
+        width:60%;
+      }
+}
+
+.photo.position2::before{
+    content:"";
+    position:absolute;
+    top:-20px;
+    right:0px;
+    display:block;
+    width:50%;
+    height:100px;
+    border:1px solid #fff;
+}
+
+
+.beforetest{
+    width:fit-content;
+    height:fit-content;
+}
+
+/* .beforetest::after{
+    content:"";
+    position:absolute;
+    top:-20px;
+    right:0px;
+    display:block;
+    width:50%;
+    height:100px;
+    border:1px solid #fff;
+} */
